@@ -3,3 +3,10 @@ author: JUNHYEOK__
 name: NoteblockManager
 version: 1.0.0
 api-version: '1.17'
+commands:
+  nbm:
+    usage: /<command>
+  test:
+    usage: /<command>
+  add:
+    usage: /<command>
