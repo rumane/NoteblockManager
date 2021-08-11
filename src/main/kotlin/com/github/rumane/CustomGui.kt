@@ -1,24 +1,24 @@
 package com.github.rumane
 
 import net.kyori.adventure.text.Component
-import net.kyori.adventure.text.ComponentBuilder
-import net.kyori.adventure.text.format.NamedTextColor
-import net.kyori.adventure.text.format.Style
 import net.kyori.adventure.text.format.TextColor
 import net.kyori.adventure.text.format.TextDecoration
-import net.md_5.bungee.api.ChatColor
-import net.md_5.bungee.api.ChatColor.RESET
 import org.bukkit.Bukkit
 import org.bukkit.Material
+import org.bukkit.block.Block
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
 import org.bukkit.inventory.ItemStack
 import java.util.*
 import kotlin.collections.HashMap
 
-object CustomGUI {
-    val playerOption: HashMap<UUID, Boolean>
+object CustomGui {
     val itemList: EnumSet<Material>
+    val playerOption: HashMap<UUID, Boolean>
+    val clickedBlock: HashMap<UUID, Block?>
+
+    val pitchTitle = Component.text("Set Pitch")
+    val instrumentTitle = Component.text("Set Instrument")
 
     val pitchSlot0 = createItem(Material.LIME_CONCRETE, "F#", "#77D700")
     val pitchSlot1 = createItem(Material.LIME_TERRACOTTA, "G", "#95C000")
@@ -45,7 +45,7 @@ object CustomGUI {
     val pitchSlot22 = createItem(Material.LIME_CONCRETE, "E", "#1FFC00")
     val pitchSlot23 = createItem(Material.LIME_TERRACOTTA, "F", "#59E800")
     val pitchSlot24 = createItem(Material.GREEN_CONCRETE, "F#", "#94C100")
-    val pitchSlot26 = createItem(Material.OAK_WOOD, "Set Instrument", "#ffffff")
+    val pitchSlot26 = createItem(Material.NOTE_BLOCK, "Set Instrument", "#ffffff")
 
     val instrumentSlot0 = createItem(Material.OAK_WOOD, "Base", "#ffffff")
     val instrumentSlot1 = createItem(Material.SAND, "Snare Drum", "#ffffff")
@@ -63,10 +63,11 @@ object CustomGUI {
     val instrumentSlot13 = createItem(Material.HAY_BLOCK, "Banjo", "#ffffff")
     val instrumentSlot14 = createItem(Material.GLOWSTONE, "Electric Piano", "#ffffff")
     val instrumentSlot15 = createItem(Material.GRASS_BLOCK, "Piano", "#ffffff")
-    val instrumentSlot26 = createItem(Material.LIME_CONCRETE, "Set Pitch", "#ffffff")
+    val instrumentSlot26 = createItem(Material.NOTE_BLOCK, "Set Pitch", "#ffffff")
 
     init {
         playerOption = HashMap()
+        clickedBlock = HashMap()
 
         itemList = EnumSet.of(
             Material.WOODEN_AXE,
@@ -78,26 +79,33 @@ object CustomGUI {
         )
     }
 
-    fun openSetPitchGUI(player: Player) {
-        val inv = Bukkit.createInventory(null, 27, Component.text("Set Pitch"))
-        inv.setPitchItem()
+    fun openSetPitchGui(player: Player) {
+        val inv = Bukkit.createInventory(null, 27, pitchTitle)
+        inv.setPitchGuiItem()
         player.openInventory(inv)
     }
 
-    fun openSetInstrumentGUI(player: Player) {
-        val inv = Bukkit.createInventory(null, 27, Component.text("Set Instrument"))
-        inv.setInstrumentGUIItem()
+    fun openSetInstrumentGui(player: Player) {
+        val inv = Bukkit.createInventory(null, 27, instrumentTitle)
+        inv.setInstrumentGuiItem()
         player.openInventory(inv)
     }
 
-    fun getOption(uuid: UUID): Boolean {
-        return playerOption[uuid]!!
+    fun getOption(player: Player): Boolean {
+        return playerOption[player.uniqueId]!!
     }
 
-    fun setOption(uuid: UUID, bool: Boolean) {
-        playerOption[uuid] = bool
+    fun setOption(player: Player, bool: Boolean) {
+        playerOption[player.uniqueId] = bool
     }
 
+    fun getClickedBlock(player: Player): Block? {
+        return clickedBlock[player.uniqueId]
+    }
+
+    fun setClickedBlock(player: Player, block: Block?) {
+        clickedBlock[player.uniqueId] = block
+    }
 
     private fun createItem(material: Material, name: String, color: String): ItemStack {
         val item = ItemStack(material)
@@ -108,7 +116,7 @@ object CustomGUI {
         return item
     }
 
-    private fun Inventory.setPitchItem() {
+    private fun Inventory.setPitchGuiItem() {
         this.setItem(0, pitchSlot0)
         this.setItem(1, pitchSlot1)
         this.setItem(2, pitchSlot2)
@@ -137,7 +145,7 @@ object CustomGUI {
         this.setItem(26, pitchSlot26)
     }
 
-    private fun Inventory.setInstrumentGUIItem() {
+    private fun Inventory.setInstrumentGuiItem() {
         this.setItem(0, instrumentSlot0)
         this.setItem(1, instrumentSlot1)
         this.setItem(2, instrumentSlot2)

@@ -1,8 +1,8 @@
 package com.github.rumane
 
-import com.github.rumane.CustomGUI.getOption
-import com.github.rumane.CustomGUI.playerOption
-import com.github.rumane.CustomGUI.setOption
+import com.github.rumane.CustomGui.getOption
+import com.github.rumane.CustomGui.playerOption
+import com.github.rumane.CustomGui.setOption
 import net.kyori.adventure.audience.Audience
 import net.kyori.adventure.text.Component
 import net.kyori.adventure.text.format.NamedTextColor
@@ -21,8 +21,8 @@ class Commands : CommandExecutor {
         if (cmd.equals(command.name, true)) {
             if (sender is Player) {
                 if (playerOption.contains(sender.uniqueId)) {
-                    setOption(sender.uniqueId, !getOption(sender.uniqueId))
-                    sender.sendMessage("${sender.name}.useNoteblockManager = ${getOption(sender.uniqueId)}")
+                    setOption(sender, !getOption(sender))
+                    sender.sendMessage("${sender.name}.useNoteblockManager = ${getOption(sender)}")
                 }
             }
         }
@@ -36,7 +36,7 @@ class Commands : CommandExecutor {
 
         else if (cmd3.equals(command.name, true)) {
             if (sender is Player) {
-                setOption(sender.uniqueId, false)
+                setOption(sender, false)
             }
         }
 

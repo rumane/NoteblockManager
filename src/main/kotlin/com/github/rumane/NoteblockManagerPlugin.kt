@@ -1,7 +1,6 @@
 package com.github.rumane
 
-import com.github.rumane.CustomGUI.playerOption
-import org.bukkit.Bukkit
+import com.github.rumane.CustomGui.playerOption
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.ArrayList
