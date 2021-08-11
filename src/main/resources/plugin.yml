@@ -10,3 +10,5 @@ commands:
     usage: /<command>
   add:
     usage: /<command>
+  send:
+    usage: /<command>

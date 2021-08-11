@@ -1,8 +1,11 @@
 package com.github.rumane
 
-import com.github.rumane.CustomGUI.getSetting
-import com.github.rumane.CustomGUI.playerOptions
-import com.github.rumane.CustomGUI.setSetting
+import com.github.rumane.CustomGUI.getOption
+import com.github.rumane.CustomGUI.playerOption
+import com.github.rumane.CustomGUI.setOption
+import net.kyori.adventure.audience.Audience
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.format.NamedTextColor
 import org.bukkit.command.Command
 import org.bukkit.command.CommandExecutor
 import org.bukkit.command.CommandSender
@@ -12,27 +15,39 @@ class Commands : CommandExecutor {
     val cmd = "nbm"
     val cmd2 = "test"
     val cmd3 = "add"
+    val cmd4 = "send"
 
     override fun onCommand(sender: CommandSender, command: Command, label: String, args: Array<out String>): Boolean {
         if (cmd.equals(command.name, true)) {
             if (sender is Player) {
-                if (playerOptions.contains(sender.uniqueId)) {
-                    setSetting(sender.uniqueId, !getSetting(sender.uniqueId))
-                    sender.sendMessage("${sender.name}.useNoteblockManager = ${getSetting(sender.uniqueId)}")
+                if (playerOption.contains(sender.uniqueId)) {
+                    setOption(sender.uniqueId, !getOption(sender.uniqueId))
+                    sender.sendMessage("${sender.name}.useNoteblockManager = ${getOption(sender.uniqueId)}")
                 }
             }
         }
 
         else if (cmd2.equals(command.name, true)) {
-            println("size: ${playerOptions.size}")
-            for (i in playerOptions) {
+            println("size: ${playerOption.size}")
+            for (i in playerOption) {
                 println("${i.key}=${i.value}")
             }
         }
 
         else if (cmd3.equals(command.name, true)) {
             if (sender is Player) {
-                setSetting(sender.uniqueId, false)
+                setOption(sender.uniqueId, false)
+            }
+        }
+
+        else if (cmd4.equals(command.name, true)) {
+            if (sender is Player) {
+                val audience = Audience.audience(sender)
+                val com = Component.text()
+                        .append(Component.text("hello", NamedTextColor.GOLD)
+                        .append(Component.text(" world", NamedTextColor.WHITE)))
+                        .build()
+                audience.sendMessage(com)
             }
         }
         return true

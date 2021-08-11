@@ -1,8 +1,14 @@
 package com.github.rumane
 
-import com.github.rumane.CustomGUI.setInstrumentGUIItem
+import net.kyori.adventure.text.Component
+import net.kyori.adventure.text.ComponentBuilder
+import net.kyori.adventure.text.format.NamedTextColor
+import net.kyori.adventure.text.format.Style
+import net.kyori.adventure.text.format.TextColor
+import net.kyori.adventure.text.format.TextDecoration
+import net.md_5.bungee.api.ChatColor
+import net.md_5.bungee.api.ChatColor.RESET
 import org.bukkit.Bukkit
-import org.bukkit.ChatColor
 import org.bukkit.Material
 import org.bukkit.entity.Player
 import org.bukkit.inventory.Inventory
@@ -11,96 +17,143 @@ import java.util.*
 import kotlin.collections.HashMap
 
 object CustomGUI {
-    val playerOptions: HashMap<UUID, Boolean>
+    val playerOption: HashMap<UUID, Boolean>
     val itemList: EnumSet<Material>
 
+    val pitchSlot0 = createItem(Material.LIME_CONCRETE, "F#", "#77D700")
+    val pitchSlot1 = createItem(Material.LIME_TERRACOTTA, "G", "#95C000")
+    val pitchSlot2 = createItem(Material.YELLOW_TERRACOTTA, "G#", "#B2A500")
+    val pitchSlot3 = createItem(Material.ORANGE_TERRACOTTA, "A", "#CC8600")
+    val pitchSlot4 = createItem(Material.ORANGE_CONCRETE, "A#", "#E26500")
+    val pitchSlot5 = createItem(Material.RED_CONCRETE, "B", "#E26500")
+    val pitchSlot6 = createItem(Material.RED_CONCRETE, "C", "#FC1E00")
+    val pitchSlot7 = createItem(Material.RED_CONCRETE, "C#", "#FE000F")
+    val pitchSlot8 = createItem(Material.PURPLE_TERRACOTTA, "D", "#F70033")
+    val pitchSlot9 = createItem(Material.MAGENTA_CONCRETE, "D#", "#E8005A")
+    val pitchSlot10 = createItem(Material.MAGENTA_CONCRETE, "E", "#CF0083")
+    val pitchSlot11 = createItem(Material.PURPLE_CONCRETE, "F", "#AE00A9")
+    val pitchSlot12 = createItem(Material.BLUE_CONCRETE, "F#", "#8600CC")
+    val pitchSlot13 = createItem(Material.BLUE_CONCRETE, "G", "#5B00E7")
+    val pitchSlot14 = createItem(Material.BLUE_CONCRETE, "G#", "#2D00F9")
+    val pitchSlot15 = createItem(Material.BLUE_CONCRETE, "A", "#020AFE")
+    val pitchSlot16 = createItem(Material.BLUE_TERRACOTTA, "A#", "#0037F6")
+    val pitchSlot17 = createItem(Material.LIGHT_BLUE_CONCRETE, "B", "#0068E0")
+    val pitchSlot18 = createItem(Material.LIGHT_BLUE_CONCRETE, "C", "#009ABC")
+    val pitchSlot19 = createItem(Material.LIME_TERRACOTTA, "C#", "#00C68D")
+    val pitchSlot20 = createItem(Material.LIME_CONCRETE, "D", "#00E958")
+    val pitchSlot21 = createItem(Material.LIME_CONCRETE, "D#", "#00FC21")
+    val pitchSlot22 = createItem(Material.LIME_CONCRETE, "E", "#1FFC00")
+    val pitchSlot23 = createItem(Material.LIME_TERRACOTTA, "F", "#59E800")
+    val pitchSlot24 = createItem(Material.GREEN_CONCRETE, "F#", "#94C100")
+    val pitchSlot26 = createItem(Material.OAK_WOOD, "Set Instrument", "#ffffff")
+
+    val instrumentSlot0 = createItem(Material.OAK_WOOD, "Base", "#ffffff")
+    val instrumentSlot1 = createItem(Material.SAND, "Snare Drum", "#ffffff")
+    val instrumentSlot2 = createItem(Material.GLASS, "Hihat", "#ffffff")
+    val instrumentSlot3 = createItem(Material.STONE, "Bass Drum", "#ffffff")
+    val instrumentSlot4 = createItem(Material.GOLD_BLOCK, "Bells", "#ffffff")
+    val instrumentSlot5 = createItem(Material.CLAY, "Flute", "#ffffff")
+    val instrumentSlot6 = createItem(Material.PACKED_ICE, "Chimes", "#ffffff")
+    val instrumentSlot7 = createItem(Material.WHITE_WOOL, "Guitar", "#ffffff")
+    val instrumentSlot8 = createItem(Material.BONE_BLOCK, "Xylophone", "#ffffff")
+    val instrumentSlot9 = createItem(Material.IRON_BLOCK, "Iron Xylophone", "#ffffff")
+    val instrumentSlot10 = createItem(Material.SOUL_SAND, "Cow Bell", "#ffffff")
+    val instrumentSlot11 = createItem(Material.PUMPKIN, "Didgeridoo", "#ffffff")
+    val instrumentSlot12 = createItem(Material.EMERALD_BLOCK, "Bit", "#ffffff")
+    val instrumentSlot13 = createItem(Material.HAY_BLOCK, "Banjo", "#ffffff")
+    val instrumentSlot14 = createItem(Material.GLOWSTONE, "Electric Piano", "#ffffff")
+    val instrumentSlot15 = createItem(Material.GRASS_BLOCK, "Piano", "#ffffff")
+    val instrumentSlot26 = createItem(Material.LIME_CONCRETE, "Set Pitch", "#ffffff")
+
     init {
-        playerOptions = HashMap()
+        playerOption = HashMap()
 
         itemList = EnumSet.of(
-        Material.WOODEN_AXE,
-        Material.STONE_AXE,
-        Material.IRON_AXE,
-        Material.GOLDEN_AXE,
-        Material.DIAMOND_AXE,
-        Material.NETHERITE_AXE
+            Material.WOODEN_AXE,
+            Material.STONE_AXE,
+            Material.IRON_AXE,
+            Material.GOLDEN_AXE,
+            Material.DIAMOND_AXE,
+            Material.NETHERITE_AXE
         )
     }
 
     fun openSetPitchGUI(player: Player) {
-        val inv = Bukkit.createInventory(null, 27, "Set Pitch")
-        inv.setPitchGUIItem()
+        val inv = Bukkit.createInventory(null, 27, Component.text("Set Pitch"))
+        inv.setPitchItem()
         player.openInventory(inv)
     }
 
     fun openSetInstrumentGUI(player: Player) {
-        val inv = Bukkit.createInventory(null, 27, "Set Instrument")
+        val inv = Bukkit.createInventory(null, 27, Component.text("Set Instrument"))
         inv.setInstrumentGUIItem()
         player.openInventory(inv)
     }
 
-    fun getSetting(uuid: UUID): Boolean {
-        return playerOptions[uuid]!!
+    fun getOption(uuid: UUID): Boolean {
+        return playerOption[uuid]!!
     }
 
-    fun setSetting(uuid: UUID, bool: Boolean) {
-        playerOptions[uuid] = bool
+    fun setOption(uuid: UUID, bool: Boolean) {
+        playerOption[uuid] = bool
     }
 
-    private fun createItem(material: Material, name: String): ItemStack {
+
+    private fun createItem(material: Material, name: String, color: String): ItemStack {
         val item = ItemStack(material)
         val itemMeta = item.itemMeta
-        itemMeta.setDisplayName(name)
+        val itemNameComponent = Component.text(name).color(TextColor.fromHexString(color)).decoration(TextDecoration.ITALIC, false)
+        itemMeta.displayName(itemNameComponent)
         item.itemMeta = itemMeta
         return item
     }
 
-    private fun Inventory.setPitchGUIItem() {
-        this.setItem(0, createItem(Material.LIME_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#77D700")}F#"))
-        this.setItem(1, createItem(Material.LIME_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#95C000")}G"))
-        this.setItem(2, createItem(Material.YELLOW_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#B2A500")}G#"))
-        this.setItem(3, createItem(Material.ORANGE_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#CC8600")}A"))
-        this.setItem(4, createItem(Material.ORANGE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#E26500")}A#"))
-        this.setItem(5, createItem(Material.RED_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#F34100")}B"))
-        this.setItem(6, createItem(Material.RED_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#FC1E00")}C"))
-        this.setItem(7, createItem(Material.RED_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#FE000F")}C#"))
-        this.setItem(8, createItem(Material.PURPLE_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#F70033")}D"))
-        this.setItem(9, createItem(Material.MAGENTA_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#E8005A")}D#"))
-        this.setItem(10, createItem(Material.MAGENTA_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#CF0083")}E"))
-        this.setItem(11, createItem(Material.PURPLE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#AE00A9")}F"))
-        this.setItem(12, createItem(Material.BLUE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#8600CC")}F#"))
-        this.setItem(13, createItem(Material.BLUE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#5B00E7")}G"))
-        this.setItem(14, createItem(Material.BLUE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#2D00F9")}G#"))
-        this.setItem(15, createItem(Material.BLUE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#020AFE")}A"))
-        this.setItem(16, createItem(Material.BLUE_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#0037F6")}A#"))
-        this.setItem(17, createItem(Material.LIGHT_BLUE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#0068E0")}B"))
-        this.setItem(18, createItem(Material.LIGHT_BLUE_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#009ABC")}C"))
-        this.setItem(19, createItem(Material.LIME_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#00C68D")}C#"))
-        this.setItem(20, createItem(Material.LIME_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#00E958")}D"))
-        this.setItem(21, createItem(Material.LIME_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#00FC21")}D#"))
-        this.setItem(22, createItem(Material.LIME_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#1FFC00")}E"))
-        this.setItem(23, createItem(Material.LIME_TERRACOTTA, "${net.md_5.bungee.api.ChatColor.of("#59E800")}F"))
-        this.setItem(24, createItem(Material.GREEN_CONCRETE, "${net.md_5.bungee.api.ChatColor.of("#94C100")}F#"))
-        this.setItem(26, createItem(Material.OAK_WOOD, "${ChatColor.RESET}Set Instrument"))
+    private fun Inventory.setPitchItem() {
+        this.setItem(0, pitchSlot0)
+        this.setItem(1, pitchSlot1)
+        this.setItem(2, pitchSlot2)
+        this.setItem(3, pitchSlot3)
+        this.setItem(4, pitchSlot4)
+        this.setItem(5, pitchSlot5)
+        this.setItem(6, pitchSlot6)
+        this.setItem(7, pitchSlot7)
+        this.setItem(8, pitchSlot8)
+        this.setItem(9, pitchSlot9)
+        this.setItem(10, pitchSlot10)
+        this.setItem(11, pitchSlot11)
+        this.setItem(12, pitchSlot12)
+        this.setItem(13, pitchSlot13)
+        this.setItem(14, pitchSlot14)
+        this.setItem(15, pitchSlot15)
+        this.setItem(16, pitchSlot16)
+        this.setItem(17, pitchSlot17)
+        this.setItem(18, pitchSlot18)
+        this.setItem(19, pitchSlot19)
+        this.setItem(20, pitchSlot20)
+        this.setItem(21, pitchSlot21)
+        this.setItem(22, pitchSlot22)
+        this.setItem(23, pitchSlot23)
+        this.setItem(24, pitchSlot24)
+        this.setItem(26, pitchSlot26)
     }
 
     private fun Inventory.setInstrumentGUIItem() {
-        this.setItem(0, createItem(Material.OAK_WOOD, "${ChatColor.RESET}Base"))
-        this.setItem(1, createItem(Material.SAND, "${ChatColor.RESET}Snare Drum"))
-        this.setItem(2, createItem(Material.GLASS, "${ChatColor.RESET}Hihat"))
-        this.setItem(3, createItem(Material.STONE, "${ChatColor.RESET}Bass Drum"))
-        this.setItem(4, createItem(Material.GOLD_BLOCK, "${ChatColor.RESET}Bells"))
-        this.setItem(5, createItem(Material.CLAY, "${ChatColor.RESET}Flute"))
-        this.setItem(6, createItem(Material.PACKED_ICE, "${ChatColor.RESET}Chimes"))
-        this.setItem(7, createItem(Material.WHITE_WOOL, "${ChatColor.RESET}Guitar"))
-        this.setItem(8, createItem(Material.BONE_BLOCK, "${ChatColor.RESET}Xylophone"))
-        this.setItem(9, createItem(Material.IRON_BLOCK, "${ChatColor.RESET}Iron Xylophone"))
-        this.setItem(10, createItem(Material.SOUL_SAND, "${ChatColor.RESET}Cow Bell"))
-        this.setItem(11, createItem(Material.PUMPKIN, "${ChatColor.RESET}Didgeridoo"))
-        this.setItem(12, createItem(Material.EMERALD_BLOCK, "${ChatColor.RESET}Bit"))
-        this.setItem(13, createItem(Material.HAY_BLOCK, "${ChatColor.RESET}Banjo"))
-        this.setItem(14, createItem(Material.GLOWSTONE, "${ChatColor.RESET}Electric Piano"))
-        this.setItem(15, createItem(Material.GRASS_BLOCK, "${ChatColor.RESET}Piano"))
-        this.setItem(26, createItem(Material.LIME_CONCRETE, "${ChatColor.RESET}Set Pitch"))
+        this.setItem(0, instrumentSlot0)
+        this.setItem(1, instrumentSlot1)
+        this.setItem(2, instrumentSlot2)
+        this.setItem(3, instrumentSlot3)
+        this.setItem(4, instrumentSlot4)
+        this.setItem(5, instrumentSlot5)
+        this.setItem(6, instrumentSlot6)
+        this.setItem(7, instrumentSlot7)
+        this.setItem(8, instrumentSlot8)
+        this.setItem(9, instrumentSlot9)
+        this.setItem(10, instrumentSlot10)
+        this.setItem(11, instrumentSlot11)
+        this.setItem(12, instrumentSlot12)
+        this.setItem(13, instrumentSlot13)
+        this.setItem(14, instrumentSlot14)
+        this.setItem(15, instrumentSlot15)
+        this.setItem(26, instrumentSlot26)
     }
 }

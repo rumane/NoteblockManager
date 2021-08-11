@@ -1,6 +1,7 @@
 package com.github.rumane
 
-import com.github.rumane.CustomGUI.playerOptions
+import com.github.rumane.CustomGUI.playerOption
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.ArrayList
@@ -19,7 +20,7 @@ class NoteblockManagerPlugin : JavaPlugin() {
     private fun save() {
         val list = ArrayList<String>()
 
-        for (i in playerOptions) {
+        for (i in playerOption) {
             list.add("${i.key}=${i.value}")
             println("${i.key}=${i.value}")
         }
@@ -34,8 +35,8 @@ class NoteblockManagerPlugin : JavaPlugin() {
         for (i in config.getStringList("PlayerOptions")) {
             val key = i.split('=')[0]
             val value = i.split('=')[1]
-            playerOptions[UUID.fromString(key)] = value.toBoolean()
-            println("${playerOptions[UUID.fromString(key)]} = ${value.toBoolean()}")
+            playerOption[UUID.fromString(key)] = value.toBoolean()
+            println("${UUID.fromString(key)} = ${value.toBoolean()}")
         }
     }
 
@@ -48,5 +49,7 @@ class NoteblockManagerPlugin : JavaPlugin() {
         server.getPluginCommand(commands.cmd)!!.setExecutor(commands)
         server.getPluginCommand(commands.cmd2)!!.setExecutor(commands)
         server.getPluginCommand(commands.cmd3)!!.setExecutor(commands)
+        server.getPluginCommand(commands.cmd4)!!.setExecutor(commands)
     }
 }
+
