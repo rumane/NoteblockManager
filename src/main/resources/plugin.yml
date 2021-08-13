@@ -4,11 +4,7 @@ name: NoteblockManager
 version: 1.0.0
 api-version: '1.17'
 commands:
-  nbm:
+  nb:
     usage: /<command>
-  test:
-    usage: /<command>
-  add:
-    usage: /<command>
-  send:
+  cb:
     usage: /<command>

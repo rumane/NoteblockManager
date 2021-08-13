@@ -1,6 +1,11 @@
 package com.github.rumane
 
 import com.github.rumane.CustomGui.playerOption
+import com.github.rumane.CustomGui.changeOption
+import com.github.rumane.CustomGui.getChangeBlockOption
+import com.github.rumane.CustomGui.setChangeBlockOption
+import com.github.rumane.CustomGui.setOption
+import org.bukkit.Bukkit
 import org.bukkit.plugin.java.JavaPlugin
 import java.util.*
 import kotlin.collections.ArrayList
@@ -10,6 +15,7 @@ class NoteblockManagerPlugin : JavaPlugin() {
         load()
         setupCommands()
         setupEvents()
+        optionInit()
     }
 
     override fun onDisable() {
@@ -19,36 +25,42 @@ class NoteblockManagerPlugin : JavaPlugin() {
     private fun save() {
         val list = ArrayList<String>()
 
-        for (i in playerOption) {
+        playerOption.forEach { i ->
             list.add("${i.key}=${i.value}")
-            println("${i.key}=${i.value}")
         }
 
         config.set("PlayerOptions", list)
+        config.set("ChangeBlock", getChangeBlockOption())
         saveConfig()
     }
 
     private fun load() {
         config.options().copyDefaults(true)
         config.addDefault("PlayerOptions", ArrayList<String>())
-        for (i in config.getStringList("PlayerOptions")) {
+        config.addDefault("ChangeBlock", Boolean)
+        config.getStringList("PlayerOptions").forEach { i ->
             val key = i.split('=')[0]
             val value = i.split('=')[1]
             playerOption[UUID.fromString(key)] = value.toBoolean()
-            println("${UUID.fromString(key)} = ${value.toBoolean()}")
         }
+        setChangeBlockOption(config.getBoolean("ChangeBlock"))
     }
 
     private fun setupEvents() {
         server.pluginManager.registerEvents(Events(), this)
+        server.pluginManager.registerEvents(InvClickEvents(), this)
     }
 
     private fun setupCommands() {
         val commands = Commands()
-        server.getPluginCommand(commands.cmd)!!.setExecutor(commands)
-        server.getPluginCommand(commands.cmd2)!!.setExecutor(commands)
-        server.getPluginCommand(commands.cmd3)!!.setExecutor(commands)
-        server.getPluginCommand(commands.cmd4)!!.setExecutor(commands)
+        server.getPluginCommand(commands.changeOptionCommand)!!.setExecutor(commands)
+        server.getPluginCommand(commands.changeBlockOptionCommand)!!.setExecutor(commands)
+    }
+
+    private fun optionInit() {
+        Bukkit.getOnlinePlayers().forEach {
+            if (!playerOption.contains(it.uniqueId)) setOption(it, false)
+        }
     }
 }
 
