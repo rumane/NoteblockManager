@@ -1,5 +1,6 @@
 package com.github.rumane
 
+import com.github.rumane.CustomGui.getAllowOption
 import com.github.rumane.CustomGui.getChangeBlockOption
 import com.github.rumane.CustomGui.getClickedBlock
 import com.github.rumane.CustomGui.openSetInstrumentGui
@@ -142,82 +143,162 @@ class InvClickEvents: Listener {
             InsSlots.SLOT0.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT0.sound(), block)
                 setInstrument(block, InsSlots.SLOT0.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT0.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT0.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT0.material()
+                }
             }
             InsSlots.SLOT1.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT1.sound(), block)
                 setInstrument(block, InsSlots.SLOT1.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT1.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT1.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT1.material()
+                }
             }
             InsSlots.SLOT2.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT2.sound(), block)
                 setInstrument(block, InsSlots.SLOT2.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT2.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT2.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT2.material()
+                }
             }
             InsSlots.SLOT3.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT3.sound(), block)
                 setInstrument(block, InsSlots.SLOT3.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT3.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT3.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT3.material()
+                }
             }
             InsSlots.SLOT4.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT4.sound(), block)
                 setInstrument(block, InsSlots.SLOT4.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT4.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT4.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT4.material()
+                }
             }
             InsSlots.SLOT5.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT5.sound(), block)
                 setInstrument(block, InsSlots.SLOT5.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT5.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT5.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT5.material()
+                }
             }
             InsSlots.SLOT6.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT6.sound(), block)
                 setInstrument(block, InsSlots.SLOT6.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT6.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT6.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT6.material()
+                }
             }
             InsSlots.SLOT7.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT7.sound(), block)
                 setInstrument(block, InsSlots.SLOT7.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT7.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT7.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT7.material()
+                }
             }
             InsSlots.SLOT8.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT8.sound(), block)
                 setInstrument(block, InsSlots.SLOT8.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT8.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT8.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT8.material()
+                }
             }
             InsSlots.SLOT9.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT9.sound(), block)
                 setInstrument(block, InsSlots.SLOT9.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT9.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT9.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT9.material()
+                }
             }
             InsSlots.SLOT10.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT10.sound(), block)
                 setInstrument(block, InsSlots.SLOT10.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT10.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT10.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT10.material()
+                }
             }
             InsSlots.SLOT11.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT11.sound(), block)
                 setInstrument(block, InsSlots.SLOT11.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT11.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT11.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT11.material()
+                }
             }
             InsSlots.SLOT12.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT12.sound(), block)
                 setInstrument(block, InsSlots.SLOT12.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT12.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT12.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT12.material()
+                }
             }
             InsSlots.SLOT13.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT13.sound(), block)
                 setInstrument(block, InsSlots.SLOT13.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT13.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT13.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT13.material()
+                }
             }
             InsSlots.SLOT14.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT14.sound(), block)
                 setInstrument(block, InsSlots.SLOT14.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT14.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT14.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT14.material()
+                }
             }
             InsSlots.SLOT15.item() -> {
                 player.playInstrumentSound(InsSlots.SLOT15.sound(), block)
                 setInstrument(block, InsSlots.SLOT15.instrument())
-                if (player.isOp && getChangeBlockOption()) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT15.material()
+                if (getChangeBlockOption()) {
+                    if (getAllowOption())
+                        player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT15.material()
+                    else
+                        if (player.isOp) player.world.getBlockAt(block.location.add(0.0, -1.0, 0.0)).type = InsSlots.SLOT15.material()
+                }
             }
             InsSlots.CHANGEGUI.item() ->
                 openSetPitchGui(player)

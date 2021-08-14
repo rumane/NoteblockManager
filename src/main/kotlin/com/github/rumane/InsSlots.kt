@@ -16,7 +16,7 @@ enum class InsSlots(
     val sound: Sound?,
     val slot: Int
 ) {
-    SLOT0(Material.OAK_WOOD, "Base", "#ffffff", Instrument.BASS_GUITAR, Sound.BLOCK_NOTE_BLOCK_BASS, 0),
+    SLOT0(Material.OAK_LOG, "Base", "#ffffff", Instrument.BASS_GUITAR, Sound.BLOCK_NOTE_BLOCK_BASS, 0),
     SLOT1(Material.SAND, "Snare Drum", "#ffffff", Instrument.SNARE_DRUM, Sound.BLOCK_NOTE_BLOCK_SNARE, 1),
     SLOT2(Material.GLASS, "Hihat", "#ffffff", Instrument.STICKS, Sound.BLOCK_NOTE_BLOCK_HAT, 2),
     SLOT3(Material.STONE, "Bass Drum", "#ffffff", Instrument.BASS_DRUM, Sound.BLOCK_NOTE_BLOCK_BASEDRUM, 3),

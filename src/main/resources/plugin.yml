@@ -8,3 +8,7 @@ commands:
     usage: /<command>
   cb:
     usage: /<command>
+  ab:
+    usage: /<command>
+  h:
+      usage: /<command>

@@ -17,6 +17,7 @@ object CustomGui {
     val playerOption: HashMap<UUID, Boolean>
     val clickedBlock: HashMap<UUID, Block?>
     var changeOption: Boolean
+    var allow: Boolean
 
     val pitchTitle = Component.text("Set Pitch")
     val instrumentTitle = Component.text("Set Instrument")
@@ -25,6 +26,7 @@ object CustomGui {
         playerOption = HashMap()
         clickedBlock = HashMap()
         changeOption = true
+        allow = false
 
         itemList = EnumSet.of(
             Material.WOODEN_AXE,
@@ -38,13 +40,13 @@ object CustomGui {
 
     fun openSetPitchGui(player: Player) {
         val inv = Bukkit.createInventory(null, 54, pitchTitle)
-        inv.setPitchGuiItem()
+        inv.pitchInit()
         player.openInventory(inv)
     }
 
     fun openSetInstrumentGui(player: Player) {
         val inv = Bukkit.createInventory(null, 27, instrumentTitle)
-        inv.init()
+        inv.insInit()
         player.openInventory(inv)
     }
 
@@ -72,22 +74,21 @@ object CustomGui {
         changeOption = bool
     }
 
-    private fun createItem(material: Material, name: String, color: String): ItemStack {
-        val item = ItemStack(material)
-        val itemMeta = item.itemMeta
-        val itemNameComponent = Component.text(name).color(TextColor.fromHexString(color)).decoration(TextDecoration.ITALIC, false)
-        itemMeta.displayName(itemNameComponent)
-        item.itemMeta = itemMeta
-        return item
+    fun getAllowOption(): Boolean {
+        return allow
     }
 
-    private fun Inventory.setPitchGuiItem() {
+    fun setAllowOption(bool: Boolean) {
+        allow = bool
+    }
+
+    private fun Inventory.pitchInit() {
         PitchSlots.values().forEach {
             this.setItem(it.slot(), it.item())
         }
     }
 
-    fun Inventory.init() {
+    fun Inventory.insInit() {
         InsSlots.values().forEach {
             this.setItem(it.slot(), it.item())
         }
